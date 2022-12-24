@@ -1,6 +1,8 @@
-# Sample Trump visualization to copy for the usage of other words.
-# Track Trump's Use of a Word Over Time
-# For practice with reading in CSV files from your own comptuer and working with dates
+## Sample Trump visualization to copy for the usage of other words, taken from my LIS 572 course:
+## Track Trump's Use of a Word Over Time
+## For practice with working with dates and creating line graphs over time.
+
+# Import all relevant libraries
 library(tidyverse)
 library("lubridate")
 library(tidytext)
