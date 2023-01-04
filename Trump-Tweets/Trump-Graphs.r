@@ -37,12 +37,12 @@ trump_says_3 <- trump_words %>% filter(word == "hillary") %>% # I considered "cl
 ggplot(trump_says_1) +
   geom_line(mapping = aes(x = year, y = count, color = "#0000FF")) +
   geom_point(mapping = aes(x = year, y = count, fill = "#000000"))
-  labs(x = "Year", y = "Frequency", title = "Trump's Usage of \"Obama\" Over Time on Twitter") 
+  labs(x = "Year", y = "Frequency", title = "Is Trump Stuck in the Past? His Usage of \"Obama\" Over Time on Twitter") 
 
 ggplot(trump_says_2) +
   geom_line(mapping = aes(x = year, y = count, color = "#FF0000")) +
   geom_point(mapping = aes(x = year, y = count, fill = "#000000")) +
-  labs(x = "Year", y = "Frequency", title = "Trump's Usage of \"Biden\" Over Time on Twitter") 
+  labs(x = "Year", y = "Frequency", title = "Sleepy Joes, Order Up! Trump's Usage of \"Biden\" Over Time on Twitter") 
 
 ggplot(trump_says_3) +
   geom_line(mapping = aes(x = year, y = count, color = "#00FF00")) +
