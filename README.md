@@ -2,5 +2,5 @@
 Projects for my research assistantship with [Dr. Melanie Walsh](https://melaniewalsh.org/), in the [UW Data Lab](https://datalab.ischool.uw.edu/).
 
 Resources include:
-- *Tweets of a Native Son*
+- [*Tweets of a Native Son*](http://tweetsofanativeson.com/), created by Dr. Walsh when she was a Ph.D. student.
 - The Twitter API
