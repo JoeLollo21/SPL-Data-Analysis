@@ -27,7 +27,7 @@ top_ngrams <- ngram_count_no_stops %>% slice_max(order_by = total, n = 50)
 # Make horizontal bar plot of the top ngrams, re-ordered from most to least frequent
 # Made interactive
 ngram_plot <- ggplot(top_ngrams) +
-  geom_col(aes(y = reorder(word, total), x = total)) +
+  geom_col(aes(y = reorder(word, total), x = total, fill = "#FF0000")) +
   labs(x = "Word Frequency", y = "Word", title = "Most Used Words in Tweets Quoting James Baldwin, 2014-15")
 
 ggplotly(ngram_plot)
