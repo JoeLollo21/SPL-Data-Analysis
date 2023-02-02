@@ -1,5 +1,5 @@
 UsageClass,CheckoutType,MaterialType,CheckoutYear,CheckoutMonth,Checkouts,Title,Creator,Subjects,Publisher,PublicationYear
-Physical,Horizon,BOOK,2018,1,16,I Am Not Your Negro,James Baldwin,"United States Race relations, Civil rights movements United States History 20th century, Racism United States, African Americans Civil rights History 20th century","Vintage Books,",2017
+Physical,Horizon,BOOK,2018,1,16,I am Not Your Negro,James Baldwin,"United States Race relations, Civil rights movements United States History 20th century, Racism United States, African Americans Civil rights History 20th century","Vintage Books,",2017
 Physical,Horizon,BOOK,2018,1,27,The Fire Next Time,James Baldwin,"African Americans, Black Muslims, United States Race relations","Vintage International Vintage Books,",1993
 Digital,OverDrive,AUDIOBOOK,2018,1,17,The Fire Next Time (Unabridged),James Baldwin,"African American Nonfiction, Nonfiction, Sociology","Blackstone Audio, Inc.",2008
 Digital,OverDrive,EBOOK,2018,1,16,The Fire Next Time,James Baldwin,"African American Nonfiction, Nonfiction, Sociology","Random House, Inc.",2013
@@ -62,7 +62,7 @@ Physical,Horizon,BOOK,2019,6,16,Giovanni's Room,James Baldwin,"Americans France 
 Physical,Horizon,BOOK,2019,6,37,If Beale Street Could Talk,James Baldwin,"African Americans Fiction, Love stories","Vintage International,",2006
 Digital,OverDrive,AUDIOBOOK,2019,6,39,If Beale Street Could Talk (Unabridged),James Baldwin,"Classic Literature, Fiction, Literature","Blackstone Audio, Inc.",2018
 Digital,OverDrive,EBOOK,2019,6,20,The Fire Next Time,James Baldwin,"African American Nonfiction, Nonfiction, Sociology","Random House, Inc.",2013
-Physical,Horizon,BOOK,2019,6,18,Go tell it on the mountain / James Baldwin.,James Baldwin,"African American men Fiction, Racism United States Fiction, African American families Harlem New York N Y Fiction, African Americans Religion Fiction, Harlem New York N Y Drama","Vintage International,",2013
+Physical,Horizon,BOOK,2019,6,18,Go Tell It on the Mountain,James Baldwin,"African American men Fiction, Racism United States Fiction, African American families Harlem New York N Y Fiction, African Americans Religion Fiction, Harlem New York N Y Drama","Vintage International,",2013
 Digital,OverDrive,AUDIOBOOK,2019,6,16,The Fire Next Time (Unabridged),James Baldwin,"African American Nonfiction, Nonfiction, Sociology","Blackstone Audio, Inc.",2008
 Digital,OverDrive,EBOOK,2019,6,25,If Beale Street Could Talk,James Baldwin,"Fiction, Literature","Random House, Inc.",2013
 Digital,OverDrive,AUDIOBOOK,2019,7,35,If Beale Street Could Talk (Unabridged),James Baldwin,"Classic Literature, Fiction, Literature","Blackstone Audio, Inc.",2018
