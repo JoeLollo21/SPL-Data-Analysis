@@ -15,6 +15,18 @@ library("stringr")
 #make the Title easier to analyze. This was all done with OpenRefine.
 spl_df <- read.csv("https://raw.githubusercontent.com/ChessPiece21/Data-is-Culture/main/data/Checkouts-By-Title-Refined.csv", stringsAsFactors = FALSE)
 
+# Visulaization 0: All the Checkouts, Over Time
+spl_df_by_year <- spl_df %>% group_by(CheckoutYear) %>%
+  summarize(TotalCheckouts = sum(Checkouts))
+  
+spl_plot <- ggplot(spl_df_by_year) + geom_line(aes(x = CheckoutYear, y = TotalCheckouts)) + geom_point(aes(x = CheckoutYear, y = TotalCheckouts)) + labs(x = "Checkout Year", y = "Checkouts", title = "Total Checkouts of James Baldwin's Work at SPL, 2005-2022")
+
+spl_monthly <- spl_df_monthly %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
+
+spl_top_titles$date <- as.Date(spl_top_titles$date, format = "%Y-%m-%d")
+
+ggplotly(spl_plot)
+
 # Visualization 1: Material Type Checkouts Over Time
 # Group the data by material type and year, create new data frame from it.
 spl_materials <- spl_df %>% group_by(MaterialType, CheckoutYear) %>% summarize(TotalCheckouts = sum(Checkouts))
@@ -62,15 +74,27 @@ ggplotly(subject_plot)
 # Filter for the top 6 titles and create new data frame.
 spl_titles_monthly <- spl_df %>% group_by(Gen.Title, CheckoutYear, CheckoutMonth) %>% summarize(TotalCheckouts = sum(Checkouts))
 
+spl_titles <- spl_df %>% group_by(Gen.Title, CheckoutYear) %>% summarize(TotalCheckouts = sum(Checkouts))
+
 # Create list of top titles:
 top_titles <- c("Another Country", "Giovanni's Room", "Go Tell it On the Mountain", "If Beale Street Could Talk", "Notes of a Native Son", "The Fire Next Time")
 
-spl_top_titles <- spl_df %>% filter(Gen.Title %in% top_titles)
+spl_top_titles_alt <- spl_titles %>% filter(Gen.Title %in% top_titles)
+
+spl_top_titles <- spl_titles_monthly %>% filter(Gen.Title %in% top_titles)
 
 # Convert to date:
 spl_top_titles <- spl_top_titles %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
 
 spl_top_titles$date <- as.Date(spl_top_titles$date, format = "%Y-%m-%d")
+
+# Same thing but only with 2012 onward, to make the top titles shorter.
+spl_top_titles_shorter <- spl_top_titles %>% filter(CheckoutYear > 2011)
+
+# Convert to date
+spl_top_titles_shorter <- spl_top_titles_shorter %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
+
+spl_top_titles_shorter$date <- as.Date(spl_top_titles_shorter$date, format = "%Y-%m-%d")
 
   # Identify top titles:
 # spl_top_titles <- spl_titles %>% filter(TotalCheckouts > 200)
@@ -79,8 +103,13 @@ spl_top_titles$date <- as.Date(spl_top_titles$date, format = "%Y-%m-%d")
   # Another Country, Giovanni's Room, Go Tell it On the Mountain, If Beale Street Could Talk, Notes of a Native Son, The Fire Next Time
 
 # Make visualization of the top titles.
-top_titles_plot <- ggplot(spl_top_titles) + geom_line(aes(x = date, y = Checkouts, color = Gen.Title)) +
-  labs(x = "Checkout Year", y = "Checkouts", title = "Top Baldwin Titles Checked Out at SPL, 2005-2022")
+top_titles_alt <- ggplot(spl_top_titles_alt) + geom_line(aes(x = CheckoutYear, y = TotalCheckouts, color = Gen.Title)) + geom_point(aes(x = CheckoutYear, y = TotalCheckouts, color = Gen.Title)) +
+  labs(x = "Checkout Year", y = "Checkouts", color = "Title", title = "Top Baldwin Titles Checked Out at SPL, 2005-2022")
+
+ggplotly(top_titles_alt)
+
+top_titles_plot <- ggplot(spl_top_titles_shorter) + geom_line(aes(x = date, y = TotalCheckouts, color = Gen.Title)) +
+  labs(x = "Checkout Year", y = "Checkouts", title = "Top Titles by James Baldwin Checked Out at SPL, 2012-2022")
 
 ggplotly(top_titles_plot)
 
@@ -98,3 +127,6 @@ ggplotly(top_titles_plot)
 ## BIG spike in If Beale Street Could Talk checkouts in 2019 when the movie 
 ##came out.
 ## Surprising increase in Giovanni's Room in 2021-2022.
+
+# Visualization 5: Subjects as a Time Series
+# TBD
