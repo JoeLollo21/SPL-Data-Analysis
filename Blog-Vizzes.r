@@ -166,6 +166,3 @@ ggplotly(top_titles_plot)
 ## BIG spike in If Beale Street Could Talk checkouts in 2019 when the movie 
 ##came out.
 ## Surprising increase in Giovanni's Room in 2021-2022.
-
-# Visualization 5: Subjects as a Time Series
-# TBD
