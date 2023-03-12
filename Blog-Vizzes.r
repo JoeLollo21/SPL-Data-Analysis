@@ -1,7 +1,3 @@
-## Final Deliverable
-## LIS 600: Independent Study w/Dr. Melanie Walsh
-## by Joe Lollo
-
 ## James Baldwin's presence in public library checkouts:
 # Install relevant packages -- once per machine.
 install.packages("tidyverse")
@@ -25,12 +21,29 @@ spl_df_by_year <- spl_df %>% group_by(CheckoutYear) %>%
   summarize(TotalCheckouts = sum(Checkouts))
 
 spl_plot <- ggplot(spl_df_by_year) + geom_line(aes(x = CheckoutYear, y = TotalCheckouts)) + geom_point(aes(x = CheckoutYear, y = TotalCheckouts)) + labs(x = "Checkout Year", y = "Checkouts", title = "Total Checkouts of James Baldwin's Work at SPL, 2005-2022")
+ggplotly(spl_plot)
 
+# Convert month/year to date
 spl_df_monthly <- spl_df %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
-
 spl_df_monthly$date <- as.Date(spl_df_monthly$date, format = "%Y-%m-%d")
 
-ggplotly(spl_plot)
+# Visualize monthly plot
+spl_plot_monthly <- ggplot(spl_df_monthly) + geom_line(aes(x = date, y = Checkouts)) + labs(x = "Checkout Year", y = "Checkouts", title = "Total Checkouts of James Baldwin's Work at SPL, 2005-2022")
+ggplotly(spl_plot_monthly)
+
+# Same thing but only with 2012 onward, to make the top titles shorter.
+spl_df_shorter <- spl_df %>% filter(CheckoutYear > 2011)
+
+# Do the same date thing but for the shorter data frame.
+spl_df_shorter <- spl_df_shorter %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
+
+spl_df_shorter$date <- as.Date(spl_df_shorter$date, format = "%Y-%m-%d")
+
+# Monthly plot visualization with shorter time frame:
+spl_plot_alt <- ggplot(spl_df_shorter) + geom_line(aes(x = date, y = Checkouts)) +
+  labs(x = "Checkout Year", y = "Checkouts", title = "Total Checkouts of James Baldwin's Work at SPL, 2012-2022")
+
+ggplotly(spl_plot_alt)
 
 # Visualization 1: Material Type Checkouts Over Time
 # Group the data by material type and year, create new data frame from it.
