@@ -67,26 +67,47 @@ title_plot <- ggplot(spl_gen_titles) + geom_col(aes(x = TotalCheckouts, y = reor
 
 ggplotly(title_plot)
 
-# Visualization 3: Subjects
-# Create new data frame of just the subjects.
-spl_subjects <- spl_df %>% separate_rows(Subjects, sep = ",")
-
-# Group subjects.
-subject_group <- spl_subjects %>% group_by(Subjects) %>%
+# Visualization 3: Subject Headings as a Time Series Analysis
+# Create new data frame of just the subjects as defined in SPL's catalog.
+spl_subjects <- spl_df %>% separate_rows(Subjects, sep= ",") %>% group_by(Subjects, CheckoutYear, CheckoutMonth) %>%
   summarize(count = n())
 
-# Create stopwords. Add blank to stopwords.
+# Create stopwords. Add blank to stopwords to remove from data frame.
 en_stopwords <- data.frame(word = stopwords(language = "en", source = "snowball"))
 en_stopwords <- en_stopwords %>% add_row(word = "")
 
-# Remove stopwords from top subjects.
-top_subjects <- subject_group %>% filter(Subjects != "") %>% filter(count > 250)
+# Remove stopwords from the data frame of subjects headings
+spl_subjects <- spl_subjects %>% filter(Subjects != "")
 
-# Graph the top subjects.
-subject_plot <- ggplot(top_subjects) + geom_col(aes(x = count, y = reorder(Subjects, +count)), fill = "#FF0000") +
-  labs(x = "Count", y = "Subjects", title = "Most Common Library Subject Headings for James Baldwin's Work)")
+# Create filtered data frames for "fiction" and "nonfiction" among the subject headings.
+fiction_df <-spl_subjects %>% filter(str_detect(Subjects, "Fiction"))
+nonfiction_df <- spl_subjects %>% filter(str_detect(Subjects, "Nonfiction"))
+
+# Filter each data frame for the most recent years (2012-2022).
+fiction_df_shorter <- fiction_df %>% filter(CheckoutYear > 2011)
+nonfiction_df_shorter <- nonfiction_df %>% filter(CheckoutYear > 2011)
+
+# Use paste0() to make each data frame just have the genre.
+fiction_df_shorter$Subjects <- paste0("Fiction")
+nonfiction_df_shorter$Subjects <- paste0("Nonfiction")
+
+# Join the two data frames to have one data frame.
+joined_df <- full_join(fiction_df_shorter, nonfiction_df_shorter, by = NULL)
+
+# Add dates.
+joined_df <- joined_df %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
+
+joined_df$date <- as.Date(joined_df$date, format = "%Y-%m-%d")
+
+# Visualize this? Try it at least?
+subject_plot <- ggplot(joined_df) + geom_line(aes(x = date, y = count, color = Subjects)) +
+  labs(x = "Date", y = "Checkouts", title = "Baldwin's Fiction vs. Nonfiction: Which is Checked Out More at SPL?")
 
 ggplotly(subject_plot)
+
+# OLD: Graph the top subjects.
+#subject_plot <- ggplot(top_subjects) + geom_col(aes(x = count, y = reorder(Subjects, +count)), fill = "#FF0000") +
+  #labs(x = "Count", y = "Subjects", title = "Most Common Library Subject Headings for James Baldwin's Work)")
 
 # Visualization 4: Top Checkouts and Trends - Time Series Analysis
 # Filter for the top 6 titles and create new data frame.
