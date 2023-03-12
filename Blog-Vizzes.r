@@ -1,7 +1,12 @@
+## Final Deliverable
+## LIS 600: Independent Study w/Dr. Melanie Walsh
+## by Joe Lollo
+
 ## James Baldwin's presence in public library checkouts:
 # Install relevant packages -- once per machine.
-#install.packages("tidyverse")
-#install.packages("plotly")
+install.packages("tidyverse")
+install.packages("plotly")
+install.packages("stopwords")
 
 # Load libraries -- once per script.
 library("tidyverse")
@@ -18,12 +23,12 @@ spl_df <- read.csv("https://raw.githubusercontent.com/ChessPiece21/Data-is-Cultu
 # Visulaization 0: All the Checkouts, Over Time
 spl_df_by_year <- spl_df %>% group_by(CheckoutYear) %>%
   summarize(TotalCheckouts = sum(Checkouts))
-  
+
 spl_plot <- ggplot(spl_df_by_year) + geom_line(aes(x = CheckoutYear, y = TotalCheckouts)) + geom_point(aes(x = CheckoutYear, y = TotalCheckouts)) + labs(x = "Checkout Year", y = "Checkouts", title = "Total Checkouts of James Baldwin's Work at SPL, 2005-2022")
 
-spl_monthly <- spl_df_monthly %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
+spl_df_monthly <- spl_df %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
 
-spl_top_titles$date <- as.Date(spl_top_titles$date, format = "%Y-%m-%d")
+spl_df_monthly$date <- as.Date(spl_df_monthly$date, format = "%Y-%m-%d")
 
 ggplotly(spl_plot)
 
@@ -96,11 +101,11 @@ spl_top_titles_shorter <- spl_top_titles_shorter %>% mutate(date = paste0(Checko
 
 spl_top_titles_shorter$date <- as.Date(spl_top_titles_shorter$date, format = "%Y-%m-%d")
 
-  # Identify top titles:
+# Identify top titles:
 # spl_top_titles <- spl_titles %>% filter(TotalCheckouts > 200)
 # This one took lots of trial and error. There is probably a MUCH better way
 #to do it.
-  # Another Country, Giovanni's Room, Go Tell it On the Mountain, If Beale Street Could Talk, Notes of a Native Son, The Fire Next Time
+# Another Country, Giovanni's Room, Go Tell it On the Mountain, If Beale Street Could Talk, Notes of a Native Son, The Fire Next Time
 
 # Make visualization of the top titles.
 top_titles_alt <- ggplot(spl_top_titles_alt) + geom_line(aes(x = CheckoutYear, y = TotalCheckouts, color = Gen.Title)) + geom_point(aes(x = CheckoutYear, y = TotalCheckouts, color = Gen.Title)) +
