@@ -52,9 +52,26 @@ spl_materials <- spl_df %>% group_by(MaterialType, CheckoutYear) %>% summarize(T
 # Graph the checkouts over time by material type.
 material_plot <- ggplot(spl_materials) + geom_line(aes(x = CheckoutYear, y = TotalCheckouts, color = MaterialType)) + 
   geom_point(aes(x = CheckoutYear, y = TotalCheckouts, color = MaterialType)) +
-  labs(x = "Checkout Year", y = "Checkouts", title= "Checkouts of James Baldwin's Work at SPL, 2005-2022")
+  labs(x = "Checkout Year", y = "Checkouts", title= "Checkouts of James Baldwin's Work at SPL by Material Type, 2005-2022")
 
 ggplotly(material_plot)
+
+# Create monthly column.
+spl_materials_monthly <- spl_df %>% group_by(MaterialType, CheckoutYear, CheckoutMonth) %>% summarize(TotalCheckouts = sum(Checkouts))
+
+# Create date column in the same way as the last one.
+spl_materials_monthly <- spl_materials_monthly %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
+
+spl_materials_monthly$date <- as.Date(spl_materials_monthly$date, format = "%Y-%m-%d")
+
+# Filter for the most recent months/years.
+spl_materials_shorter <- spl_materials_monthly %>% filter(CheckoutYear > 2011)
+
+# Visualize the monthly plot instead.
+material_plot_alt <- ggplot(spl_materials_shorter) + geom_line(aes(x = date, y = TotalCheckouts, color = MaterialType)) +
+  labs(x = "Checkout Year", y = "Checkouts", title = "Total Monthly Checkouts of James Baldwin's Work at SPL by Material Type, 2012-2022")
+
+ggplotly(material_plot_alt)
 
 # Visualization 2: Top Title Checkouts
 # Group the data by (general) title, create new data frame from it.
@@ -66,6 +83,9 @@ title_plot <- ggplot(spl_gen_titles) + geom_col(aes(x = TotalCheckouts, y = reor
   labs(x = "Checkouts", y = "", title = "Number of Checkouts by Title, 2005-2022")
 
 ggplotly(title_plot)
+
+# Visualization 2.5: Top Tiles as a Heatmap
+
 
 # Visualization 3: Subject Headings as a Time Series Analysis
 # Create new data frame of just the subjects as defined in SPL's catalog.
@@ -105,9 +125,10 @@ subject_plot <- ggplot(joined_df) + geom_line(aes(x = date, y = count, color = S
 
 ggplotly(subject_plot)
 
-# OLD: Graph the top subjects.
-#subject_plot <- ggplot(top_subjects) + geom_col(aes(x = count, y = reorder(Subjects, +count)), fill = "#FF0000") +
-  #labs(x = "Count", y = "Subjects", title = "Most Common Library Subject Headings for James Baldwin's Work)")
+subject_plot_alt <- ggplot(joined_df) + geom_line(aes(x = CheckoutYear, y = count, color = Subjects)) +
+  labs(x = "Date", y = "Checkouts", title = "Baldwin's Fiction vs. Nonfiction: Which is Checked Out More at SPL?")
+
+ggplotly(subject_plot_alt)
 
 # Visualization 4: Top Checkouts and Trends - Time Series Analysis
 # Filter for the top 6 titles and create new data frame.
