@@ -186,10 +186,16 @@ ggplotly(top_titles_plot)
 ## Surprising increase in Giovanni's Room in 2021-2022.
 
 
-# Visualization 4.5: Top Titles as a Heatmap
-# Create heatmap of the titles.
-top_titles_map <- ggplot(spl_top_titles_shorter) + 
-  geom_tile(aes(x = CheckoutYear, y = Gen.Title, fill = TotalCheckouts), color = "#000000") +
-  scale_fill_gradient(low = "white", high = "red") +
-  labs(x = "Checkout Year", y = "Title", ) +
-  coord_fixed()
+# Visualization 5: Top Titles as a Heatmap
+# Create heatmap of the titles. Create separate data frame.
+spl_titles_by_type <- spl_df %>% group_by(Gen.Title, MaterialType) %>% summarize(TotalCheckouts = sum(Checkouts))
+
+spl_top_titles_by_type <- spl_titles_by_type %>% filter(Gen.Title %in% top_titles)
+
+top_titles_map <- ggplot(spl_top_titles_by_type) +
+  geom_tile(aes(x = MaterialType, y = Gen.Title, fill = TotalCheckouts), color = "#000000") +
+  geom_text(aes(x = MaterialType, y = Gen.Title, label = TotalCheckouts), color = "#FFFFFF") +
+  scale_fill_gradient(low = "#000000", high = "#00CCFF") +
+  labs(x = "Material Type", y = "Title", fill = "Total Checkouts")
+
+ggplotly(top_titles_map)
