@@ -82,10 +82,7 @@ spl_gen_titles <- spl_df %>% group_by(Gen.Title) %>%
 title_plot <- ggplot(spl_gen_titles) + geom_col(aes(x = TotalCheckouts, y = reorder(Gen.Title, +TotalCheckouts)), fill = "#FF0000") +
   labs(x = "Checkouts", y = "", title = "Number of Checkouts by Title, 2005-2022")
 
-ggplotly(title_plot)
-
-# Visualization 2.5: Top Tiles as a Heatmap
-
+ggplotly(title_plot) 
 
 # Visualization 3: Subject Headings as a Time Series Analysis
 # Create new data frame of just the subjects as defined in SPL's catalog.
@@ -187,3 +184,12 @@ ggplotly(top_titles_plot)
 ## BIG spike in If Beale Street Could Talk checkouts in 2019 when the movie 
 ##came out.
 ## Surprising increase in Giovanni's Room in 2021-2022.
+
+
+# Visualization 4.5: Top Titles as a Heatmap
+# Create heatmap of the titles.
+top_titles_map <- ggplot(spl_top_titles_shorter) + 
+  geom_tile(aes(x = CheckoutYear, y = Gen.Title, fill = TotalCheckouts), color = "#000000") +
+  scale_fill_gradient(low = "white", high = "red") +
+  labs(x = "Checkout Year", y = "Title", ) +
+  coord_fixed()
