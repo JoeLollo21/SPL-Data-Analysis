@@ -7,7 +7,7 @@
 - Blog Post: attached as a PDF.
 - Cleaned Dataset
 - R Script
-- SPL Data Dictionary: attached as a CSV.
+- SPL Data Dictionary: attached as a CSV, intended for future researchers.
 
 ## BibTeX Bibliographies:
 For future researchers to import into the citation management system of their choice. 
