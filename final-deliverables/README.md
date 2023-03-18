@@ -1,12 +1,13 @@
 # Final LIS 600 Deliverables:
 ## Research Support:
 - Tweet Collector: created for an early exercise.
-- Literature Review: attached as PDF.
+- Literature Review: attached as a PDF.
 
 ## Blog Post:
-- Blog Post PDF
-- R Script: 
-- 
+- Blog Post: attached as a PDF.
+- Cleaned Dataset
+- R Script
+- SPL Data Dictionary: attached as a CSV.
 
 ## BibTeX Bibliographies:
 For future researchers to import into the citation management system of their choice. 
