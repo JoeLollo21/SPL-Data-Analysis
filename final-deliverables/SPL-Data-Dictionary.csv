@@ -1,0 +1,14 @@
+Variable,Dataset-Label,Type,Allowed-Values,Description,Notes
+Format,UsageClass,String,Plain text,Indicates whether the item is digital or physical in SPL's catalog.,
+Checkout Type,CheckoutType,String,Plain text,Indicates whether the item was checked out physically or digitally by SPL.,
+Material Type,MaterialType,String,Plain text,Indicates whether the item is a physical or digital resource (related to Format).,
+Checkout Year,CheckoutYear,Integer,Years ranging from 2005 to 2022,Indicates the year the item was checked out.,
+Checkout Month,CheckoutMonth,Integer,Months ranging from January (1) to December (12),Indicates the month the item was checked out.,
+Checkouts,Checkouts,Integer,Real numbers greater than 0,Indicates the number of checkouts each month.,
+Title,Title,String,Plain text,Indicates the specific title of the work.,
+General Title,Gen-Title,String,Plain text,Indicates the general title of the work.,Was added by me in OpenRefine.
+ISBN,ISBN,Integer,"Real number, must be formatted as a standard ISBN",Indicats the item's International Standard Book Number (ISBN).,Most values are blank.
+Creator,Creator,String,Plain text,Indicates the author or creator of the work.,
+Subject Headings,Subjects,String,"Plain text, must be in the LCSH index",Indicates the subject headings from the Library of Congress (LCSH) that describe the work.,
+Publisher,Publisher,String,Plain text,Indicates the publisher of the work.,
+Publication Year,PublicationYear,String,Plain text,Indicates the year the work was published.,
