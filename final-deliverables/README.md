@@ -8,6 +8,7 @@
 - [Cleaned SPL Dataset](https://github.com/ChessPiece21/Data-is-Culture/blob/main/final-deliverables/Checkouts-By-Title-Refined.csv)
 - [R Script](https://github.com/ChessPiece21/Data-is-Culture/blob/main/final-deliverables/Blog-Vizzes-Final.r)
 - [SPL Data Dictionary](https://github.com/ChessPiece21/Data-is-Culture/blob/main/final-deliverables/SPL-Data-Dictionary.csv): attached as a CSV, intended for future researchers.
+- [Plotly Charts](https://chart-studio.plotly.com/~JoeLollo21)
 
 ## BibTeX Bibliographies:
 For future researchers to import into the citation management system of their choice. 
