@@ -52,7 +52,7 @@ spl_materials_shorter <- spl_materials_monthly %>% filter(CheckoutYear > 2011)
 
 # Visualize the monthly plot instead.
 material_plot_alt <- ggplot(spl_materials_shorter) + geom_line(aes(x = date, y = TotalCheckouts, color = MaterialType)) +
-  labs(x = "Checkout Year", y = "Checkouts", title = "Total Monthly Checkouts of James Baldwin's Work at SPL by Material Type, 2012-2022")
+  labs(x = "Checkout Year", y = "Checkouts", title = "Total Checkouts by Material Type, 2012-2022")
 
 ggplotly(material_plot_alt)
 
@@ -150,6 +150,17 @@ top_titles_map <- ggplot(spl_top_titles_by_type) +
   geom_tile(aes(x = MaterialType, y = Gen.Title, fill = TotalCheckouts), color = "#000000") +
   geom_text(aes(x = MaterialType, y = Gen.Title, label = TotalCheckouts), color = "#FFFFFF") +
   scale_fill_gradient(low = "#000000", high = "#0094FF") +
-  labs(x = "Material Type", y = "Title", fill = "Total Checkouts")
+  labs(x = "Material Type", y = "Title", fill = "Total Checkouts", title = "Top Titles Checked Out, by Material Type")
 
 ggplotly(top_titles_map)
+
+# Upload ggplotly plots to the Plotly API:
+Sys.setenv("plotly_username" = "JoeLollo21")
+Sys.setenv("plotly_api_key" = "StG9GebmLPqXjbdj7kyB")
+
+api_create(spl_plot, filename = "Total Checkouts of James Baldwin's Work at SPL, 2012-2022")
+api_create(material_plot_alt, filename = "Total Checkouts by Material Type, 2012-2022")
+api_create(top_titles_plot, fielname = "Top Titles Checked Out, 2012-2022")
+api_create(fire_plot, filename = "Checkouts of The Fire Next Time, 2012-2022")
+api_create(beale_st_plot, filename = "Checkouts of Beale Street, 2012-2022")
+api_create(top_titles_map, filename = "Top Titles Checked Out, by Material Type")
