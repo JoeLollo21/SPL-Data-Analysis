@@ -1,4 +1,4 @@
-# Data is Culture
+# Viral Literature
 Projects for my research assistantship with [Dr. Melanie Walsh](https://melaniewalsh.org/) at UW in Winter 2023.
 
 Resources include:
